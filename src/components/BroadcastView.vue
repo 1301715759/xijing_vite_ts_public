@@ -5,10 +5,10 @@
     <div v-for="(data, index) in broadcastList" :key="data.id" class="row">
       <div class="row-left">
       <!-- 使用新的UserAvatar组件替换原来的img标签 -->
-        <UserAvatar 
-          :uid="data.uid"
-          :avatar="data.avatar"
-          :nickname="data.nickname"
+        <PopoverCard 
+          :id="data.uid"
+          :img="data.avatar"
+          card-type="user"
           size="large"
         />
         <div>这里是播放</div>
@@ -30,8 +30,7 @@
 <script lang="ts" setup>
 import useBroadcast from '@/hooks/useBroadcast';
 
-import UserInfoCard from '@/components/UserInfoCard.vue';
-import UserAvatar from '@/components/UserAvatar.vue';
+import PopoverCard from '@/components/PopoverCard.vue';
 
 const { broadcastList, loadBroadcasts, loading, error } = useBroadcast();
 

@@ -36,8 +36,8 @@ export interface InteractiveRoomBytagRequestParams {
 
 /**
  * 广场动态接口的请求参数
- * @param baike 百科参数
- * @param hide_top 是否隐藏置顶
+ * @param baike 非必要
+ * @param hide_top 是否隐藏置顶动态，非必要
  * @param id 用户ID
  * @param order 排序方式
  * @param page 页码
@@ -46,16 +46,16 @@ export interface InteractiveRoomBytagRequestParams {
  * @param type 动态类型
  */
 export interface SquareNewsRequestParams {
-    baike: string;
-    hide_top: string;
+    baike?: string;
+    hide_top?: string;
     id: string;
-    order: string;
+    order?: string;
     /**
      * 页码
      */
-    page: string;
-    size: string;
-    topic_dynamic_id: string;
+    page?: string;
+    size?: string;
+    topic_dynamic_id?: string;
     /**
      * 获取动态类型（1，2，7返回类型一致），1为关注列表。2为推荐列表。6是告白列表。7为最新列表。0为指定id下的全部内容，4为带剧本配音动态，5为语音动态
      */

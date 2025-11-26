@@ -13,7 +13,12 @@
             <ul v-else class="square-content">
                 <li v-for="data in squareNewsList" :key="data.id" class="news-item">
                     <div class="news-header">
-                        <img :src="data.author.avatar" alt="作者" class="author-avatar">
+                        <PopoverCard 
+                          :id="data.author.uid"
+                          :img="data.author.avatar"
+                          card-type="user"
+                          size="medium"
+                        />
                         <span class="author-name">{{ data.author.nickname }}</span>
                         <span>{{ data.create_time }}</span>
                     </div>
@@ -28,6 +33,7 @@
 <script lang="ts" setup>
 import useSquareNews from '@/hooks/useSquareNews';
 import MediaViewer from '@/components/MediaViewer.vue';
+import PopoverCard from '@/components/PopoverCard.vue';
 let squareObject = {
     /** 关注动态参数 */
     follow: {

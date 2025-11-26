@@ -3,13 +3,19 @@
     <h2>关注在线视图</h2>
     <el-button type="primary" @click="loadFollowOnline()">获取关注在线</el-button>
     <li v-for="data in followOnlineList" :key="data.id">
-      <img :src="data.avatar" alt="用户头像" style="width: 20px; height: 20px; border-radius: 50%;">
+      <PopoverCard 
+        :id="data.uid"
+        :img="data.avatar"
+        card-type="user"
+        size="medium"
+      />
     </li>
   </div>
 </template>
 
 <script lang="ts" setup>
 import useFollowOnline from '@/hooks/useFollowOnline';
+import PopoverCard from '@/components/PopoverCard.vue';
 const { followOnlineList, loadFollowOnline, loading, error } = useFollowOnline();
 
 
