@@ -1,0 +1,4 @@
+{
+    "Authkey": "此项非必须，你的秘钥",
+    "Authorization": "bearer .....此项必须，你的Token 如何获取请自备"
+}
