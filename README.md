@@ -1,5 +1,24 @@
 # Vue 3 + TypeScript + Vite
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+基于 Vue 3 + TypeScript + Vite 模板， 集成戏鲸APP原生api接口的项目。
 
-Learn more about the recommended Project Setup and IDE Support in the [Vue Docs TypeScript Guide](https://vuejs.org/guide/typescript/overview.html#project-setup).
+# todoList
+- [ ] 集成戏鲸APP原生api接口
+- [~] 集成需要原生功能组件到页面
+  - [x] 广播
+  - [ ] 用户信息
+  - [ ] 关注列表
+  - [x] 关注在线房间
+  - [x] 收藏房间列表
+  - [ ] 房间详细情况
+  - [x] 关注动态/广场动态
+  - [ ] 我看过谁/谁看过我
+  - [ ] 剧本
+  - [ ] 配音列表
+  - [ ] 修改登录用户信息
+  - [ ] websocket房间语音（戏鲸app基于声网sdk，大概率无法实现）
+  - [ ] websocket消息列表（戏鲸app基于网易云信，大概率无法实现）
+  - [ ] 更多...
+- [ ] 页面样式美化
+- [ ] 适配移动端页面
+  
