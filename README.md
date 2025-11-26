@@ -23,9 +23,26 @@
   - [ ] ~~websocket房间语音（戏鲸app基于声网sdk，大概率无法实现）~~
   - [ ] ~~websocket消息列表（戏鲸app基于网易云信，大概率无法实现）~~
   - [ ] 更多...
+- [ ] 页面路由配置
 - [ ] 页面样式美化
 - [ ] 适配移动端页面
-## API认证配置
+
+## 开发环境搭建
+
+1. 安装依赖:
+   ```bash
+   npm install
+   ```
+
+2. 配置认证信息:
+   重命名`src/api-V2/config/example_auth_key.json`为`src/api-V2/config/auth_key.json`并填入您的认证信息
+
+3. 启动开发服务器:
+   ```bash
+   npm run dev
+   ```
+
+## 认证信息配置
 
 ~~项目使用`auth_key.json`文件来手动管理API认证信息~~。
 在运行项目之前，您需要配置此文件：
