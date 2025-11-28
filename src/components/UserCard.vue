@@ -39,7 +39,6 @@ import { ref, onMounted, watch, computed } from 'vue'
 import useUserInfo from '@/hooks/useUserInfo'
 import { useHoveredContextStore } from '@/stores/hoveredContextStore'
 import type { UserInfoResponseData } from '@/types/userInfo'
-import { da } from 'element-plus/es/locales.mjs'
 
 
 

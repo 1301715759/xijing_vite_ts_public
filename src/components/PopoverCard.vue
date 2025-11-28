@@ -13,7 +13,7 @@
     <template #reference>
       <slot><img :src="img" 
         :alt="cardType === 'user' ? '用户头像' : '房间头像'" 
-        :class="size" 
+        :class="[size, {'male': gender === 1, 'female': gender === 2}, placeholder]"  
         /></slot>
     </template>
 
@@ -37,6 +37,8 @@ interface Props {
   id: number
   img: string
   size?: 'large' | 'medium' | 'small'
+  gender?: number
+  placeholder?: string
 }
 
 const props = defineProps<Props>()
@@ -61,18 +63,45 @@ const onPopoverHide = () => {
 
 <style scoped lang="scss">
 .large {
+  width: 80px;
+  height: 80px;
+}
+.medium {
   width: 60px;
   height: 60px;
 }
-.medium {
+.small {
   width: 40px;
   height: 40px;
 }
-.small {
-  width: 30px;
-  height: 30px;
-}
 img {
   border-radius: 50%;
+  &.male.broadcast {
+    border: 2px solid #007bff;
+    animation: animated-border-male 1.5s linear infinite;
+  }
+  &.female.broadcast {
+    border: 2px solid #ff69b4;
+    animation: animated-border-female 1.5s linear infinite;
+  }
+
 }
+
+@keyframes animated-border-female {
+    0% {
+        box-shadow: 0 0 0 0 #ff69b4c4;
+    }
+    100% {
+        box-shadow: 0 0 0 12px #ff69b400;
+    }
+}
+@keyframes animated-border-male {
+    0% {
+        box-shadow: 0 0 0 0 #007bffc4;
+    }
+    100% {
+        box-shadow: 0 0 0 12px #007bff00;
+    }
+}
+
 </style>
