@@ -1,5 +1,5 @@
 import authconfig from '@/api-V2/config/auth_key.json'
-
+import { getCookie } from '@/utils/cookie';
 export const API_BASE_URL = 'https://api.aipiaxi.com'
 
 export const GLOBAL_HEADERS = {
@@ -10,5 +10,5 @@ export const GLOBAL_HEADERS = {
     'App-Ver': '33800',
 
     'Authkey': authconfig.Authkey,
-    'Authorization': authconfig.Authorization,
+    'Authorization': getCookie('Authorization') || '',
 };

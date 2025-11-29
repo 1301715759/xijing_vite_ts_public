@@ -47,7 +47,7 @@ const hoveredContextStore = useHoveredContextStore()
 
 // 使用useUserInfo hook，传入具体的URL路径
 const { dataList, loadUserInfo, loading, error } = useUserInfo(`/user/info/${hoveredContextStore.hoveredUserId}`)
-let userData = ref<UserInfoResponseData | null>(null)
+let userData = ref<UserInfoResponseData | null>() as unknown as UserInfoResponseData
 // 组件挂载时加载用户数据
 // onMounted(async () => {
 //   if (hoveredContextStore.hoveredUserId) {
@@ -67,7 +67,7 @@ watch(
     if (newUserId) {
       try {
         await loadUserInfo({ mini: 1 })
-        userData.value = dataList.value as unknown as UserInfoResponseData
+        userData.value = dataList.value 
       } catch (err) {
         console.error('Failed to load user info:', err)
       }

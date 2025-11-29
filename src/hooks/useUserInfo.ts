@@ -1,7 +1,7 @@
 import useFetchList from '@/utils/useFetchList';
 import { fetchUserInfo, type UserInfoResponseData } from '@/api-V2';
 import { type UserInfoRequestParams } from '@/api-V2/requestTypes';
-import { ElMessage } from 'element-plus';
+
 
 /**
  * 获取用户信息 Hook

@@ -1,5 +1,5 @@
 <template >
-  <div class="common-layout" style="width:100vw">
+  <!-- <div class="common-layout" style="width:100vw">
     <el-container style="height: 100vh;">
       <el-aside width="300px">Aside1</el-aside>
       <el-container >
@@ -11,7 +11,8 @@
       </el-container>
   
     </el-container>
-  </div>
+  </div> -->
+  <router-view />
 </template>
 
 <script setup lang="ts">

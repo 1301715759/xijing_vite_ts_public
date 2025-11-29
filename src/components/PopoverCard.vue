@@ -16,7 +16,7 @@
         :class="[size, {'male': gender === 1, 'female': gender === 2}, placeholder]"  
         /></slot>
     </template>
-
+    
     <!-- 内部容器加上 min-height -->
     <div style="min-width: 250px; min-height: 200px;">
           <!-- 根据卡片类型显示不同的内容 -->
