@@ -3,14 +3,15 @@ export { fetchBroadcasts } from '@/api-V2/broadcast';
 export { fetchFollowOnline } from '@/api-V2/followOnline';
 export { fetchSquareNews } from '@/api-V2/squareNews';
 export { interactiveRoomBytag } from '@/api-V2/interactive';
-export { fetchUserInfo } from '@/api-V2/userInfo';
+export { fetchUserInfo, fetchSoundCard } from '@/api-V2/userInfo';
 
 // 统一导出所有类型定义
 export type { 
   BroadcastRequestParams,
   FollowOnlineRequestParams,
   SquareNewsRequestParams,
-  InteractiveRoomBytagRequestParams
+  InteractiveRoomBytagRequestParams,
+  SoundCardRequestParams
 } from '@/api-V2/requestTypes';
 
 // 统一导出所有响应数据类型
@@ -22,6 +23,7 @@ export type {
   UserInfoResponseData,
   AppLoginResponseData,
   WxLoginResponseData,
+  SoundCardResponseData,
 } from '@/types';
 
 // 导出API端点常量
@@ -32,7 +34,7 @@ import { fetchBroadcasts } from '@/api-V2/broadcast';
 import { fetchFollowOnline } from '@/api-V2/followOnline';
 import { fetchSquareNews } from '@/api-V2/squareNews';
 import { interactiveRoomBytag } from '@/api-V2/interactive';
-import { fetchUserInfo } from '@/api-V2/userInfo';
+import { fetchUserInfo, fetchSoundCard } from '@/api-V2/userInfo';
 import { wechatLoginQrcode, appLoginQrcode, wxLoginCheck, appLoginCheck } from '@/api-V2/login';
 
 
@@ -42,6 +44,7 @@ const ApiMethods = {
   fetchSquareNews,
   interactiveRoomBytag,
   fetchUserInfo,
+  fetchSoundCard,
   wechatLoginQrcode,
   appLoginQrcode,
   wxLoginCheck,

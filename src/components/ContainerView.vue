@@ -13,8 +13,8 @@
         <div 
           style="height: 90%; box-shadow: var(--el-border-color-light) 0px 0px 10px;"
         >
-          <el-splitter>
-            <el-splitter-panel size="60%">
+          <el-splitter lazy>
+            <el-splitter-panel size="80%" >
               <div class="demo-panel">
                   <el-tabs v-model="activeName" ref="tabRef" class="demo-tabs">
                       <el-tab-pane label="广播" name="first" class="tab-pane">
@@ -27,7 +27,7 @@
                   
               </div>
             </el-splitter-panel>
-            <el-splitter-panel :min="200">
+            <el-splitter-panel :min="200" collapsible>
               <div class="demo-panel">
                   <el-tabs v-model="activeName2" ref="tabRef" class="demo-tabs" >
                       <el-tab-pane label="好友在玩" name="first2" class="tab-pane">

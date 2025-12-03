@@ -18,17 +18,19 @@
 
     <!-- 实际内容 -->
     <template v-else>
-      <div class="user-header">
-        <div class="user-basic-info">
-          <h3>{{ userData.nickname }}</h3>
-          <p>UID: {{ userData.id }}</p>
+      <div class="user-content" :style="{backgroundImage: 'url(' + userData.bg_img + ')'}">
+        <div class="user-header">
+          <div class="user-basic-info">
+            <h3>{{ userData.nickname }}</h3>
+            <p>UID: {{ userData.id }}</p>
+          </div>
         </div>
-      </div>
-      <div class="user-details">
-        <p><strong>年龄:</strong> {{ userData.age_str }}</p>
-        <p><strong>签名:</strong> {{ userData.motto }}</p>
-        <p><strong>性别:</strong> {{ userData.gender === 1 ? '男' : '女' }}</p>
-        <p><strong>等级:</strong> {{ userData.level }}</p>
+        <div class="user-details">
+          <p><strong>年龄:</strong> {{ userData.age_str }}</p>
+          <p><strong>签名:</strong> {{ userData.motto }}</p>
+          <p><strong>等级:</strong> {{ userData.level }}</p>
+          <p><strong>城市:</strong> {{ userData.city_name }}</p>
+        </div>
       </div>
     </template>
   </div>
@@ -46,7 +48,7 @@ import type { UserInfoResponseData } from '@/types/userInfo'
 const hoveredContextStore = useHoveredContextStore()
 
 // 使用useUserInfo hook，传入具体的URL路径
-const { dataList, loadUserInfo, loading, error } = useUserInfo(`/user/info/${hoveredContextStore.hoveredUserId}`)
+const { dataList, loadUserInfo, loading } = useUserInfo(`/user/info/${hoveredContextStore.hoveredUserId}`)
 let userData = ref<UserInfoResponseData | null>() as unknown as UserInfoResponseData
 // 组件挂载时加载用户数据
 // onMounted(async () => {
@@ -80,9 +82,17 @@ watch(
 </script>
 
 <style scoped lang="scss">
+.user-content {
+  padding: 5px;
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+  color:var(--onMainColor);
+  
+}
 .user-card {
   min-width: 250px;
-  padding: 15px;
+  // padding: 15px;
 }
 
 .user-header {
@@ -99,7 +109,7 @@ watch(
 .user-basic-info p {
   margin: 0;
   font-size: 12px;
-  color: #666;
+  // color: #666;
 }
 
 .user-details p {

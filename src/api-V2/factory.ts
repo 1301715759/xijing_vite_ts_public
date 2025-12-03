@@ -8,10 +8,13 @@ export const API_ENDPOINTS = {
   FOLLOW_ONLINE: '/api/v2/follow/track/room',
   // 广场动态接口
   SQUARE_NEWS: '/square/news',
+  // 声音卡片接口
+  SOUND_CARD: '/api/v2/vpc/detail',
   // app二维码接口
   APP_QRCODE: '/api/v2/qrcode',
   // 微信二维码接口
   WECHAT_QRCODE: '/wechat/loginQRcode',
+  
   
 } as const;
 

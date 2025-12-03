@@ -70,3 +70,14 @@ export interface UserInfoRequestParams {
     mini?: number;
     [property: string]: any;
 }
+
+/**
+ * 声音卡片接口的请求参数
+ * @param id 声音卡片ID
+ * @param uid 用户ID
+ * id和uid二选一，
+ */
+export interface SoundCardRequestParams {
+    id?: number;
+    uid?: number;
+}

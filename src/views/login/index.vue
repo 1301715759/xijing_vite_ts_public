@@ -1,68 +1,61 @@
 <template>
-  <div class="login-container">
-    <div class="login-card">
-      <div class="login-header">
-        <h1 class="login-title">扫码登录</h1>
+  <div class="anime-login-container">
+    <!-- 背景装饰 -->
+    <div class="bg-decoration">
+      <div class="bg-circle circle-1"></div>
+      <div class="bg-circle circle-2"></div>
+      <div class="bg-circle circle-3"></div>
+      <div class="bg-sparkles">
+        <div class="sparkle sparkle-1"></div>
+        <div class="sparkle sparkle-2"></div>
+        <div class="sparkle sparkle-3"></div>
+        <div class="sparkle sparkle-4"></div>
+        <div class="sparkle sparkle-5"></div>
+      </div>
+    </div>
+    
+    <!-- 主要内容 -->
+    <div class="login-wrapper">
+      <div class="login-card">
+        <!-- 选项卡切换 -->
         <div class="login-tabs">
           <button 
             class="tab-button" 
             :class="{ active: loginType === 'app' }"
             @click="switchLoginType('app')"
           >
-            <span class="tab-icon">📱</span>
-            <span>应用扫码</span>
+            <span class="tab-text">应用登录</span>
           </button>
           <button 
             class="tab-button" 
             :class="{ active: loginType === 'wechat' }"
             @click="switchLoginType('wechat')"
           >
-            <span class="tab-icon">💬</span>
-            <span>微信扫码</span>
-          </button>
-        </div>
-      </div>
-      
-      <div class="login-content">
-        <div class="qrcode-container" v-if="qrcodeData">
-          <div class="qrcode-wrapper">
-            <img 
-              :src="qrcodeImage" 
-              alt="登录二维码" 
-              class="qrcode-image"
-              v-if="qrcodeImage"
-            />
-            <!-- <div class="qrcode-loading" v-else>
-              <div class="loading-spinner"></div>
-              <p>{{ qrcodeLoading ? '正在生成二维码...' : '请刷新二维码' }}</p>
-            </div>
-            <div v-if="qrcodeError" class="qrcode-error">
-              <div class="error-icon">⚠️</div>
-              <p>{{ qrcodeError }}</p>
-            </div> -->
-          </div>
-          <div class="qrcode-status">
-            <p v-if="loginStatus === 'waiting'">请使用{{ loginType === 'app' ? '应用' : '微信' }}扫描上方二维码</p>
-            <p v-else-if="loginStatus === 'scanned'">扫描成功，请在手机上确认登录</p>
-            <p v-else-if="loginStatus === 'confirmed'">登录成功，正在跳转...</p>
-            <p v-else-if="loginStatus === 'expired'">二维码已失效，请刷新重试</p>
-          </div>
-          <button class="refresh-button" @click="refreshQrcode">
-            <span class="refresh-icon">🔄</span>
-            <span>刷新二维码</span>
+            <span class="tab-text">微信登录</span>
           </button>
         </div>
         
-        <div class="login-tips">
-          <div class="tip-item">
-            <span class="tip-icon">💡</span>
-            <span v-if="loginType === 'app'">请使用应用扫描二维码登录</span>
-            <span v-else>请使用微信扫描二维码登录</span>
+        <!-- 二维码区域 -->
+        <div class="qrcode-section">
+          <div class="qrcode-frame">
+            <div class="qrcode-container">
+              <img 
+                :src="qrcodeImage" 
+                alt="登录二维码" 
+                class="qrcode-image"
+                v-if="qrcodeImage"
+              />
+              <div class="qrcode-overlay" v-if="loginStatus === 'expired'">
+                <div class="expired-text">二维码已失效</div>
+              </div>
+            </div>
           </div>
-          <div class="tip-item">
-            <span class="tip-icon">🔒</span>
-            <span>登录过程安全加密</span>
-          </div>
+          
+          <!-- 刷新按钮 -->
+          <button class="refresh-btn" @click="refreshQrcode">
+            <div class="refresh-icon"></div>
+            <span>刷新二维码</span>
+          </button>
         </div>
       </div>
     </div>
@@ -93,228 +86,270 @@ onMounted(() => {
 </script>
 
 <style scoped>
-.login-container {
+/* 二次元风格登录页面 */
+.anime-login-container {
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background: linear-gradient(135deg, var(--bgColor) 0%, var(--surfaceColor) 100%);
+  width: 100%;
+  background: linear-gradient(135deg, #1a1a2e, #16213e);
+  font-family: 'Helvetica Neue', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  overflow: hidden;
+}
+
+/* 背景装饰 */
+.bg-decoration {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.bg-circle {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(40px);
+  opacity: 0.15;
+}
+
+.circle-1 {
+  width: 300px;
+  height: 300px;
+  background: #D8FA00;
+  top: -100px;
+  left: -100px;
+  animation: float 8s ease-in-out infinite;
+}
+
+.circle-2 {
+  width: 250px;
+  height: 250px;
+  background: #ff6b6b;
+  bottom: -80px;
+  right: -80px;
+  animation: float 10s ease-in-out infinite reverse;
+}
+
+.circle-3 {
+  width: 200px;
+  height: 200px;
+  background: #4ecdc4;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: pulse 6s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-20px) rotate(5deg); }
+}
+
+@keyframes pulse {
+  0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.15; }
+  50% { transform: translate(-50%, -50%) scale(1.1); opacity: 0.25; }
+}
+
+/* 闪光效果 */
+.bg-sparkles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.sparkle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: #fff;
+  border-radius: 50%;
+  opacity: 0;
+  animation: twinkle 3s infinite;
+}
+
+.sparkle-1 { top: 20%; left: 15%; animation-delay: 0s; }
+.sparkle-2 { top: 30%; left: 70%; animation-delay: 0.5s; }
+.sparkle-3 { top: 60%; left: 25%; animation-delay: 1s; }
+.sparkle-4 { top: 75%; left: 60%; animation-delay: 1.5s; }
+.sparkle-5 { top: 40%; left: 85%; animation-delay: 2s; }
+
+@keyframes twinkle {
+  0%, 100% { opacity: 0; transform: scale(0.5); }
+  50% { opacity: 0.8; transform: scale(1.2); }
+}
+
+/* 主要内容区域 */
+.login-wrapper {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 400px;
   padding: 20px;
-  font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
 }
 
 .login-card {
-  width: 100%;
-  max-width: 400px;
-  background: var(--surfaceColor);
-  border-radius: 16px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 24px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
   overflow: hidden;
-  border: 1px solid var(--surfaceAlpha);
+  padding: 30px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-.login-header {
-  padding: 24px 24px 16px;
-  text-align: center;
-}
-
-.login-title {
-  font-size: 24px;
-  font-weight: 600;
-  color: var(--textColor);
-  margin: 0 0 20px 0;
-  letter-spacing: 1px;
-}
-
+/* 选项卡切换 */
 .login-tabs {
   display: flex;
-  background: var(--bgColor);
-  border-radius: 12px;
+  margin-bottom: 30px;
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 16px;
   padding: 4px;
-  margin-bottom: 8px;
 }
 
 .tab-button {
   flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  padding: 12px 16px;
+  padding: 12px;
   background: transparent;
   border: none;
-  border-radius: 8px;
-  color: var(--textAlpha);
-  font-size: 14px;
-  font-weight: 500;
+  border-radius: 12px;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  font-weight: 500;
+  color: #666;
+  font-size: 15px;
 }
 
 .tab-button.active {
-  background: var(--mainColor);
-  color: var(--onMainColor);
-  box-shadow: 0 2px 8px rgba(42, 79, 109, 0.3);
+  background: #fff;
+  color: #333;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-.tab-icon {
-  font-size: 18px;
+.tab-text {
+  position: relative;
+  z-index: 1;
 }
 
-.login-content {
-  padding: 0 24px 24px;
+/* 二维码区域 */
+.qrcode-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.qrcode-frame {
+  position: relative;
+  margin-bottom: 25px;
+  padding: 15px;
+  background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
 }
 
 .qrcode-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: 24px;
-}
-
-.qrcode-wrapper {
-  width: 200px;
-  height: 200px;
-  background: var(--bgColor);
+  position: relative;
+  width: 220px;
+  height: 220px;
+  background: #fff;
   border-radius: 12px;
+  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 16px;
-  overflow: hidden;
-  position: relative;
 }
 
 .qrcode-image {
-  width: 180px;
-  height: 180px;
+  width: 200px;
+  height: 200px;
   object-fit: contain;
 }
 
-.qrcode-loading {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  color: var(--textAlpha);
-}
-
-.qrcode-error {
+.qrcode-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 10px;
-  padding: 8px 12px;
-  background-color: #fef0f0;
-  border-radius: 4px;
-  color: #f56c6c;
-  font-size: 14px;
-}
-
-.error-icon {
-  margin-right: 5px;
-  font-size: 16px;
-}
-
-.loading-spinner {
-  width: 32px;
-  height: 32px;
-  border: 3px solid var(--surfaceAlpha);
-  border-top: 3px solid var(--mainColor);
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-
-.qrcode-status {
-  text-align: center;
-  margin-bottom: 16px;
-}
-
-.qrcode-status p {
-  margin: 0;
-  color: var(--textColor);
-  font-size: 14px;
-  line-height: 1.5;
-}
-
-.refresh-button {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  padding: 8px 16px;
-  background: var(--mainColor);
-  border: none;
-  border-radius: 8px;
-  color: var(--onMainColor);
-  font-size: 14px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.refresh-button:hover {
-  background: var(--linkColor);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(74, 158, 188, 0.3);
-}
-
-.refresh-icon {
-  font-size: 16px;
-}
-
-.login-tips {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  padding: 16px;
-  background: var(--bgColor);
   border-radius: 12px;
 }
 
-.tip-item {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  color: var(--textAlpha);
-  font-size: 13px;
+.expired-text {
+  color: #fff;
+  font-size: 16px;
+  font-weight: 500;
 }
 
-.tip-icon {
-  font-size: 16px;
+/* 刷新按钮 */
+.refresh-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 24px;
+  background: linear-gradient(135deg, #D8FA00, #b8d600);
+  border: none;
+  border-radius: 30px;
+  color: #000;
+  font-weight: 600;
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 15px rgba(216, 250, 0, 0.3);
+}
+
+.refresh-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(216, 250, 0, 0.4);
+}
+
+.refresh-btn:active {
+  transform: translateY(0);
+}
+
+.refresh-icon {
+  width: 18px;
+  height: 18px;
+  position: relative;
+}
+
+.refresh-icon::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23000'%3E%3Cpath d='M17.65,6.35C16.2,4.9 14.21,4 12,4A8,8 0 0,0 4,12A8,8 0 0,0 12,20C15.73,20 18.84,17.45 19.73,14H17.65C16.83,16.33 14.61,18 12,18A6,6 0 0,1 6,12A6,6 0 0,1 12,6C13.66,6 15.14,6.69 16.22,7.78L13,11H20V4L17.65,6.35Z'/%3E%3C/svg%3E") no-repeat center;
+  background-size: contain;
 }
 
 /* 响应式设计 */
 @media (max-width: 480px) {
-  .login-container {
-    padding: 12px;
+  .login-wrapper {
+    padding: 15px;
   }
   
   .login-card {
-    max-width: 100%;
+    padding: 20px;
   }
   
-  .login-header {
-    padding: 20px 20px 12px;
-  }
-  
-  .login-content {
-    padding: 0 20px 20px;
-  }
-  
-  .qrcode-wrapper {
-    width: 180px;
-    height: 180px;
+  .qrcode-container {
+    width: 200px;
+    height: 200px;
   }
   
   .qrcode-image {
-    width: 160px;
-    height: 160px;
+    width: 180px;
+    height: 180px;
   }
 }
 </style>

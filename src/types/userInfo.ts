@@ -5,8 +5,11 @@
 //     data: Data;
 //     r: number;
 //     [property: string]: any;
-// }
 
+import type { SoundCardResponseData } from './soundCard';
+
+// }
+export type { SoundCardResponseData } from '@/types/soundCard';
 export interface UserInfoResponseData {
     age: number;
     age_str: string;
@@ -102,3 +105,5 @@ export interface Rich {
     value: number;
     [property: string]: any;
 }
+
+export type UidSoundCard = Record<number, SoundCardResponseData>

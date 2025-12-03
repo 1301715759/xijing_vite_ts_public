@@ -1,4 +1,4 @@
-import { ref, onMounted, shallowRef } from 'vue';
+import { ref, onMounted, shallowRef, type ShallowRef } from 'vue';
 
 
 /**
@@ -6,6 +6,7 @@ import { ref, onMounted, shallowRef } from 'vue';
  * 支持数组或对象类型的数据自动推断
  * 
  * @template T - 数据类型，可以是数组或对象
+ * @template IsArray - 是否为数组类型，默认为 false
  * @param fetchFunction - 请求数据的 API 方法，需返回 Promise
  *   @param params 请求参数
  *   @returns Promise<any> 返回的响应数据
@@ -16,7 +17,7 @@ import { ref, onMounted, shallowRef } from 'vue';
  * 
  * @example
  * // 获取数组数据
- * const { dataList, loadData, loading, error } = useFetchList<User>(
+ * const { dataList, loadData, loading, error } = useFetchList<User, true>(
  *   fetchUsers, 
  *   { page: 1, size: 10 }, 
  *   'data.data',
@@ -24,7 +25,7 @@ import { ref, onMounted, shallowRef } from 'vue';
  * );
  * 
  * // 获取对象数据
- * const { dataList, loadData, loading, error } = useFetchList<User>(
+ * const { dataList, loadData, loading, error } = useFetchList<User, false>(
  *   fetchUser, 
  *   { id: 1 }, 
  *   'data',
@@ -37,12 +38,17 @@ export default function useFetchList<T>(
   dataPath: string = 'data',
   autoLoad: boolean = false
 ) {
+
+  
   /** 响应式数据，类型为数组或对象，根据实际数据自动推断 */
-  const dataList = shallowRef<T | T[] | null>(null);
+  // type DataType = IsArray extends true ? T[] : T;
+  const dataList = shallowRef<T | undefined>(undefined);
   /** 加载状态 */
   const loading = ref(false);
   /** 错误信息 */
   const error = ref<unknown>(null);
+  /** 响应码 */
+  let statusCode = ref<number | undefined>(undefined);
 
   /**
    * 加载数据方法
@@ -53,20 +59,35 @@ export default function useFetchList<T>(
     loading.value = true;
     // 清除之前的错误信息
     error.value = null;
-    
+    // 重置状态码
+    statusCode.value = undefined;
+
     try {
       // 发起请求获取数据
       const response = await fetchFunction(params);
+      
+      // 检查是否是400错误的响应对象
+      if (response && response.status === 400) {
+        statusCode.value = 400;
+        console.warn('收到400响应，但不抛出异常:', response.data);
+        loading.value = false;
+        return;
+      }
+      
       // 根据 dataPath 路径提取数据
       const data = dataPath.split('.').reduce((obj, key) => obj?.[key], response);
-      
+      // 获取响应码
+      statusCode.value = response.status;
+      // console.log('@@获取StatusCode:', statusCode.value);
       // 根据实际数据类型自动推断
       if (Array.isArray(data)) {
         // 数组类型：直接返回数组
         dataList.value = data as T[];
-      } else {
+        // console.log('数组数据类型', typeof data);
+      } else if (data !== undefined && data !== null) {
         // 对象类型：直接返回数据
         dataList.value = data as T;
+        // console.log('数据类型', typeof data);
       }
     } catch (err) {
       // 捕获并设置错误信息
@@ -94,5 +115,7 @@ export default function useFetchList<T>(
     loading,
     /** 错误信息 */
     error,
+    /** 响应码 */
+    statusCode,
   };
 }
