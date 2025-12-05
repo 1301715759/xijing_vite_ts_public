@@ -1,5 +1,5 @@
 import useFetchList from '@/utils/useFetchList';
-import { interactiveRoomBytag, type InteractiveRoomBytagRequestParams, type FollowRoomResponseData } from '@/api-V2';
+import { fetchRoomListByTag, type RoomsByTagRequestParams, type RoomListResponseData } from '@/api-V2';
 import { ElMessage } from 'element-plus';
 
 /**
@@ -8,20 +8,19 @@ import { ElMessage } from 'element-plus';
  * @param defaultParams 默认请求参数
  * @param autoLoad 是否自动加载
  */
-export default function useInteractiveRoomBytag(
-  url: string,
-  defaultParams: InteractiveRoomBytagRequestParams = { page: 1, limit: 20, tag: '收藏', type: 0 },
+export default function useRoomsByTag(
+  defaultParams: RoomsByTagRequestParams = { page: 1, limit: 20, tag: '收藏', type: 0 },
   autoLoad: boolean = false
 ) {
   // console.log('@@获取到的接口路径:', url);
   // console.log('@@默认请求参数:', defaultParams);
   // fetchFunction 需要传递 url 和 params
-  const fetchFunction = (params: InteractiveRoomBytagRequestParams) => interactiveRoomBytag(url, params);
+  
 
-  const { dataList, loadData, loading, error } = useFetchList<FollowRoomResponseData>(fetchFunction, defaultParams, 'data', autoLoad);
+  const { dataList, loadData, loading, error } = useFetchList<RoomListResponseData>(fetchRoomListByTag, defaultParams, 'data', autoLoad);
 
   // 自定义加载和错误提示
-  async function loadInteractiveRoomBytag(params: InteractiveRoomBytagRequestParams = defaultParams) {
+  async function loadRoomsByTag(params: RoomsByTagRequestParams = defaultParams) {
     // console.log('@@请求参数:', params);
     ElMessage.info(`正在加载${params.tag}房间列表...`);
     await loadData(params);
@@ -36,7 +35,7 @@ export default function useInteractiveRoomBytag(
 
   return {
     followRoomList: dataList,
-    loadInteractiveRoomBytag,
+    loadRoomsByTag,
     loading,
     error,
   };

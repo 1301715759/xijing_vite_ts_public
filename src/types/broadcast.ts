@@ -13,7 +13,7 @@ export interface BroadcastResponseData {
     /**
      * 多少秒前
      */
-    createTime: string;
+    create_time: string;
     ext: null;
     /**
      * 性别
@@ -30,7 +30,7 @@ export interface BroadcastResponseData {
     /**
      * 标签样式
      */
-    newTags: NewTags;
+    new_tags: NewTags;
     /**
      * 座位情况，1为男，2为女
      */
@@ -38,11 +38,11 @@ export interface BroadcastResponseData {
     /**
      * 房间id
      */
-    roomid: number;
+    room_id: number;
     /**
      * 房间模式
      */
-    roomMode: number;
+    room_mode: number;
     /**
      * 房间标签
      */
@@ -65,13 +65,13 @@ export interface NewTags {
     /**
      * 标签背景色
      */
-    backgroundColor: string;
+    background_color: string;
     /**
      * 标签窗体色
      */
-    frameColor: string;
+    frame_color: string;
     icon: string;
-    pagBg: string;
+    pag_bg: string;
     /**
      * 标签名称
      */
@@ -79,7 +79,7 @@ export interface NewTags {
     /**
      * 字体颜色
      */
-    textColor: string;
+    text_color: string;
     [property: string]: any;
 }
 export interface MiniBroadcastResponseData {

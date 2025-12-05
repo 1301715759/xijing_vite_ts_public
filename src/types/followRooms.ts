@@ -2,7 +2,7 @@
  * Request
  */
 import type { NewTags } from '@/types/broadcast';
-export interface FollowRoomResponseData {
+export interface RoomListResponseData {
     allow_join_cate: number;
     avatars: null;
     background_anim: string;

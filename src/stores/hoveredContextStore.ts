@@ -1,8 +1,8 @@
 import { defineStore } from 'pinia'
 
 interface HoveredContextState {
-  hoveredUserId: number | null
-  hoveredRoomId: number | null
+  hoveredUserId: string | null
+  hoveredRoomId: string | null
 }
 
 export const useHoveredContextStore = defineStore('hoveredContext', {
@@ -12,11 +12,11 @@ export const useHoveredContextStore = defineStore('hoveredContext', {
   }),
   
   actions: {
-    setHoveredUserId(id: number | null) {
+    setHoveredUserId(id: string | null) {
       this.hoveredUserId = id
     },
     
-    setHoveredRoomId(id: number | null) {
+    setHoveredRoomId(id: string | null) {
       this.hoveredRoomId = id
     },
     

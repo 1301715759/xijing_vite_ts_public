@@ -6,6 +6,7 @@
                 <el-button type="primary" @click="loadSquareNews(squareObject.follow)">关注动态</el-button>
                 <el-button type="primary" @click="loadSquareNews(squareObject.recommend)">推荐动态</el-button>
                 <el-button type="primary" @click="loadSquareNews(squareObject.latest)">最新动态</el-button>
+                <el-input style="width: 200px;" v-model="searchUid" placeholder="请输入用户ID" @keyup.enter="loadSquareNews({ type: '0', id: searchUid, page: '1', size: '30' })"></el-input>
             </div>
             
             <div v-if="loading">加载中...</div>
@@ -31,10 +32,17 @@
 </template>
 
 <script lang="ts" setup>
+import { ref } from 'vue';
 import useSquareNews from '@/hooks/useSquareNews';
 import MediaViewer from '@/components/MediaViewer.vue';
 import PopoverCard from '@/components/PopoverCard.vue';
+let searchUid = ref('');
+
 let squareObject = {
+    /** 用户动态参数 */
+    user: {
+        type: '0', id: searchUid.value, page: '1', size: '30'
+    },
     /** 关注动态参数 */
     follow: {
         type: '1', id: '0', page: '1', size: '30'
@@ -43,7 +51,7 @@ let squareObject = {
     recommend: {
         type: '2', id: '0', page: '1', size: '30'
     },
-    
+    /** 最新动态参数 */
     latest: {
         type: '7', id: '0', page: '1', size: '30'
     }

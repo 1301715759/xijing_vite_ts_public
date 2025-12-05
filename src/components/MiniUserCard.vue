@@ -48,7 +48,7 @@ import type { UserInfoResponseData } from '@/types/userInfo'
 const hoveredContextStore = useHoveredContextStore()
 
 // 使用useUserInfo hook，传入具体的URL路径
-const { dataList, loadUserInfo, loading } = useUserInfo(`/user/info/${hoveredContextStore.hoveredUserId}`)
+const { dataList, loadUserInfo, loading } = useUserInfo(hoveredContextStore.hoveredUserId || '')
 let userData = ref<UserInfoResponseData | null>() as unknown as UserInfoResponseData
 // 组件挂载时加载用户数据
 // onMounted(async () => {

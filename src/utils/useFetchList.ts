@@ -1,4 +1,4 @@
-import { ref, onMounted, shallowRef, type ShallowRef } from 'vue';
+import { ref, onMounted } from 'vue';
 
 
 /**
@@ -33,7 +33,7 @@ import { ref, onMounted, shallowRef, type ShallowRef } from 'vue';
  * );
  */
 export default function useFetchList<T>(
-  fetchFunction: (params: any) => Promise<any>,
+  fetchFunction: (params: any, url?: string) => Promise<any>,
   defaultParams: any = {},
   dataPath: string = 'data',
   autoLoad: boolean = false
@@ -42,7 +42,7 @@ export default function useFetchList<T>(
   
   /** 响应式数据，类型为数组或对象，根据实际数据自动推断 */
   // type DataType = IsArray extends true ? T[] : T;
-  const dataList = shallowRef<T | undefined>(undefined);
+  const dataList = ref<T | undefined>(undefined);
   /** 加载状态 */
   const loading = ref(false);
   /** 错误信息 */
@@ -54,7 +54,7 @@ export default function useFetchList<T>(
    * 加载数据方法
    * @param params - 请求参数，默认为 defaultParams
    */
-  async function loadData(params = defaultParams) {
+  async function loadData(params = defaultParams, url?: string) {
     // 设置加载状态
     loading.value = true;
     // 清除之前的错误信息
@@ -64,16 +64,7 @@ export default function useFetchList<T>(
 
     try {
       // 发起请求获取数据
-      const response = await fetchFunction(params);
-      
-      // 检查是否是400错误的响应对象
-      if (response && response.status === 400) {
-        statusCode.value = 400;
-        console.warn('收到400响应，但不抛出异常:', response.data);
-        loading.value = false;
-        return;
-      }
-      
+      const response = await fetchFunction(params, url);
       // 根据 dataPath 路径提取数据
       const data = dataPath.split('.').reduce((obj, key) => obj?.[key], response);
       // 获取响应码

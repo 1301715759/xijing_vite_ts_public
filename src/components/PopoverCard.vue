@@ -12,7 +12,7 @@
   >
     <template #reference>
       <slot><img :src="img" 
-        :alt="cardType === 'user' ? '用户头像' : '房间头像'" 
+        :alt="cardType === 'user' ? '用户头像' : '房间封面'" 
         :class="[size, {'male': gender === 1, 'female': gender === 2}, placeholder]"  
         /></slot>
     </template>
@@ -20,7 +20,7 @@
     <!-- 内部容器加上 min-height -->
     <div style="min-width: 250px; min-height: 200px;">
           <!-- 根据卡片类型显示不同的内容 -->
-      <UserCard v-if="popoverVisible && cardType === 'user'" />
+      <MiniUserCard v-if="popoverVisible && cardType === 'user'" />
       <RoomCard v-else-if="cardType === 'room'" />
     </div>
   </el-popover>
@@ -28,7 +28,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import UserCard from './UserCard.vue'
+import MiniUserCard from './MiniUserCard.vue'
 import RoomCard from './RoomCard.vue'
 import { useHoveredContextStore } from '@/stores/hoveredContextStore'
 
@@ -48,9 +48,9 @@ const onPopoverShow = () => {
   popoverVisible.value = true
   // 设置对应的ID到store中
   if (props.cardType === 'user' && props.id) {
-    hoveredContextStore.setHoveredUserId(props.id)
+    hoveredContextStore.setHoveredUserId(props.id.toString())
   } else if (props.cardType === 'room' && props.id) {
-    hoveredContextStore.setHoveredRoomId(props.id)
+    hoveredContextStore.setHoveredRoomId(props.id.toString())
   }
 }
 

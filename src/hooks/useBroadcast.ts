@@ -30,7 +30,7 @@ export default function useBroadcast(
 
   // 自定义加载和错误提示
   async function loadBroadcasts(params: BroadcastRequestParams = defaultParams) {
-    ElMessage.info('正在加载广播...');
+    ElMessage.info(`正在加载第${params.page}页广播...`);
     await loadData(params);
     if (error.value) {
       console.error('广播加载失败:', error.value);

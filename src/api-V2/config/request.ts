@@ -27,25 +27,4 @@ instance.interceptors.response.use(
     }
 );
 
-// 添加请求拦截器，用于捕获网络错误
-instance.interceptors.request.use(
-    (config) => {
-        return config;
-    },
-    (error) => {
-        // 捕获请求配置错误
-        console.warn('请求配置错误:', error);
-        return Promise.reject(error);
-    }
-);
-
-// 全局错误处理，防止未捕获的Promise错误显示在控制台
-window.addEventListener('unhandledrejection', (event) => {
-    // 检查是否是axios请求错误
-    if (event.reason && event.reason.response && event.reason.response.status === 400) {
-        console.warn('捕获到未处理的400错误:', event.reason);
-        event.preventDefault(); // 阻止错误显示在控制台
-    }
-});
-
 export default instance;

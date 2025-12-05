@@ -27,7 +27,7 @@ export interface FollowOnlineRequestParams {
  * @param page 页码
  * @param limit 每页数量
  */
-export interface InteractiveRoomBytagRequestParams {
+export interface RoomsByTagRequestParams {
     tag: string;
     type: number;
     page: number;

@@ -2,6 +2,25 @@
  * Request
  */
 import type { NewTags } from '@/types/broadcast';
+/**
+ * 房间座位信息返回数据类型
+ */
+export interface RoomSeatsResponseData {
+    agora_token?: string;
+    countdown_until?: number;
+    identify?: string;
+    idx?: number;
+    is_muted?: boolean;
+    is_offline?: boolean;
+    is_ready?: boolean;
+    progress?: number;
+    show_not_play_icon?: boolean;
+    user?: User;
+    [property: string]: any;
+}
+/**
+ * 房间详细信息返回数据类型
+ */
 export interface RoomInfoResponseData {
     allow_join_cate: number;
     avatars: null;

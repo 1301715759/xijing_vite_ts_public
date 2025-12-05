@@ -12,16 +12,16 @@ import { type UserInfoRequestParams, type SoundCardRequestParams } from '@/api-V
  * @param autoLoad 是否自动加载
  */
 export default function useUserInfo(
-    url: string,
+    uid: string,
     defaultParams: UserInfoRequestParams = { mini: 1 },
     autoLoad: boolean = false
 ) {
     // console.log('@@获取到的接口路径:', url);
     // console.log('@@默认请求参数:', defaultParams);
     // fetchFunction 需要传递 url 和 params
-    const fetchFunction = (params: UserInfoRequestParams) => fetchUserInfo(url, params);
+    
 
-    const { dataList, loadData, loading, error } = useFetchList<UserInfoResponseData>(fetchFunction, defaultParams, 'data.data', autoLoad);
+    const { dataList, loadData, loading, error } = useFetchList<UserInfoResponseData>(fetchUserInfo(uid), defaultParams, 'data.data', autoLoad);
 
     // 自定义加载和错误提示
     async function loadUserInfo(params: UserInfoRequestParams = defaultParams) {
@@ -68,9 +68,9 @@ export function useSoundCard(
             //ElMessage.error('语音卡片信息加载失败，请稍后重试');
         } else {
             if (statusCode.value === 200) {
-                console.log('用户%d语音卡片信息数据:', params.uid, dataList.value);
+                // console.log('用户%d语音卡片信息数据:', params.uid, dataList.value);
             } else if (statusCode.value === 400) {
-                console.log('用户%d语音卡片信息不存在:', params.uid);
+                // console.log('用户%d语音卡片信息不存在:', params.uid);
             }
             //ElMessage.success('语音卡片信息加载成功');
         }

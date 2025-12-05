@@ -1,15 +1,36 @@
-import { createDynamicApiCaller } from '@/api-V2/factory';
-import type { InteractiveRoomBytagRequestParams } from '@/api-V2/requestTypes';
-import type { FollowRoomResponseData } from '@/types/followRooms';
+import { createApiCaller, API_ENDPOINTS } from '@/api-V2/factory';
+import type { RoomsByTagRequestParams } from '@/api-V2/requestTypes';
+import type { RoomListResponseData } from '@/types/followRooms';
+import type { RoomSeatsResponseData, RoomInfoResponseData } from '@/types/roomInfo';
 
 /**
- * 根据标签获取互动房间数据
- * 注意：这个方法需要传入完整的URL，因为它是动态的
- * @param url 接口路径
- * @param params 请求参数
- * @returns 互动房间数据
+ * 获取房间信息详情
+ * @param roomId 房间ID
+ * @returns 互动房间详情数据
  */
-export const interactiveRoomBytag = createDynamicApiCaller<FollowRoomResponseData>();
+export const fetchRoomInfo = (roomId: string) => createApiCaller<RoomInfoResponseData>(API_ENDPOINTS.Room, roomId);
 
-// 导出请求参数类型和响应数据类型
-export type { InteractiveRoomBytagRequestParams, FollowRoomResponseData };
+/**
+ * 获取房间座位信息详情，需要Url拼接
+ * @param roomId 房间ID
+ * @returns 互动房间座位信息数据
+ */
+export const fetchRoomSeats = (roomId: string,) => createApiCaller<RoomSeatsResponseData>(API_ENDPOINTS.Room, roomId+'/broadcasters');
+
+/**
+ * 根据标签获取房间列表
+ * @param params 请求参数
+ * @returns 互动房间列表数据
+ */
+export const fetchRoomListByTag = createApiCaller<RoomListResponseData>(API_ENDPOINTS.ROOMs_BY_TAG);
+
+/**
+ * 获取
+ */
+export type { 
+    RoomsByTagRequestParams, 
+    RoomListResponseData,
+    RoomSeatsResponseData,
+    RoomInfoResponseData,
+};
+

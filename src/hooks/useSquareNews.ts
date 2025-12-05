@@ -9,7 +9,7 @@ import { ElMessage } from 'element-plus';
  * @returns 包含广场动态列表、加载方法、加载状态和错误信息的对象
  */
 export default function useSquareNews(
-    defaultParams: SquareNewsRequestParams = { type: '2', id: '0', page: '1', size: '30' },
+    defaultParams: SquareNewsRequestParams ,
     autoLoad: boolean = true
 ) {
   
@@ -18,8 +18,9 @@ export default function useSquareNews(
     const { dataList, loadData, loading, error } = useFetchList<SquareNewsResponseData>(fetchFunction, defaultParams, 'data.data', autoLoad);
     
     // 自定义加载和错误提示
-    async function loadSquareNews(params: SquareNewsRequestParams = defaultParams) {
-        ElMessage.info(`正在加载广场动态...`);
+    async function loadSquareNews(params: SquareNewsRequestParams) {
+        ElMessage.info(`正在加载广场动态...${params}`);
+        console.log('params', params);
         await loadData(params);
         if (error.value) {
             console.error('广场动态加载失败:', error.value);

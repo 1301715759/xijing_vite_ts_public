@@ -33,12 +33,9 @@
 1. 安装依赖:
    ```bash
    npm install
-   ```
+   ``
 
-2. 配置认证信息:
-   重命名`src/api-V2/config/example_auth_key.json`为`src/api-V2/config/auth_key.json`并填入您的认证信息
-
-3. 启动开发服务器:
+2. 启动开发服务器:
    ```bash
    npm run dev
    ```
@@ -52,14 +49,5 @@
 本项目会将获取到的认证信息存储在浏览器的cookie中，后续请求会自动携带认证信息（模拟原app）。
 本项目不会将认证信息存储在本地文件或数据库中，确保您的浏览器支持cookie功能。
 如果您担心本项目会盗取您的登录认证信息，那请不要使用本项目。
-本项目只用于学习和技术研究目的，提高本人的vue3开发能力。
+本项目只用于学习和技术研究目的，提高本人的vue3模块化开发能力。
 
-示例配置：
-```json
-{
-  "Authkey": "YmM6ZmM6ZTc6MGI6ZWM6YTA",
-  "Authorization": "bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.xxxxx"
-}
-```
-
-注意：请保护好您的认证信息，不要将其提交到公共仓库。

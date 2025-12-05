@@ -23,3 +23,5 @@ src/api-V2/config/auth_key.json
 *.njsproj
 *.sln
 *.sw?
+.VSCodeCounter/*
+
