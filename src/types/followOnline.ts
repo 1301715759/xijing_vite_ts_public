@@ -4,19 +4,17 @@
 export interface FollowOnlineResponseData {
 
     avatar: string;
-    avatarFrame: string;
+    avatar_frame: string;
     desc: string;
     exp: number;
     gender: number;
-    hasPassword: boolean;
-    isClub: number;
+    has_password: boolean;
+    is_club: number;
     mode: string;
     motto: string;
     nickname: string;
-    roomid: number;
+    room_id: number;
     uid: number;
-
-
     [property: string]: any;
 }
 

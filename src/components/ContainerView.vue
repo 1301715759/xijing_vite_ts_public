@@ -14,7 +14,7 @@
           style="height: 90%; box-shadow: var(--el-border-color-light) 0px 0px 10px;"
         >
           <el-splitter lazy>
-            <el-splitter-panel size="80%" >
+            <el-splitter-panel size="75%" >
               <div class="demo-panel">
                   <el-tabs v-model="activeName" ref="tabRef" class="demo-tabs">
                       <el-tab-pane label="广播" name="first" class="tab-pane">
@@ -27,14 +27,14 @@
                   
               </div>
             </el-splitter-panel>
-            <el-splitter-panel :min="200" collapsible>
+            <el-splitter-panel :min="300" collapsible>
               <div class="demo-panel">
-                  <el-tabs v-model="activeName2" ref="tabRef" class="demo-tabs" >
+                  <el-tabs v-model="activeName2" ref="tabRef" class="demo-tabs" @tab-click="handleTabClick">
                       <el-tab-pane label="好友在玩" name="first2" class="tab-pane">
-                          <FollowOnline />
+                          <FollowOnline :currentTab="currentTab" />
                       </el-tab-pane>
-                      <el-tab-pane label="收藏房间" name="second2" class="tab-pane" :lazy="true">
-                          <FollowRoomsView />
+                      <el-tab-pane label="房间列表" name="second2" class="tab-pane" :lazy="true">
+                          <FollowRoomsView :currentTab="currentTab"/>
                       </el-tab-pane>
                   </el-tabs>
               </div>
@@ -52,12 +52,19 @@ import BroadcastView from '@/components/BroadcastView.vue'
 import SquareView from '@/components/SquareView.vue';
 import FollowOnline from '@/components/FollowOnline.vue';
 import FollowRoomsView from '@/components/FollowRoomsView.vue';
-import { ElMessage } from 'element-plus';
+import { ElMessage, type TabsPaneContext, type TabPaneName } from 'element-plus';
 import { deleteCookie } from '@/utils/cookie';
 
+let currentTab = ref<string>('first2');
 const router = useRouter();
 let activeName = ref('first');
 let activeName2 = ref('first2');
+
+// 处理标签页点击事件
+const handleTabClick = async (tabName: TabsPaneContext, event: Event) => {
+  currentTab.value = tabName?.paneName?.toString() || '';
+  // console.log('点击了标签页:', tabName.paneName, currentTab.value);
+};
 
 // 退出登录
 const logout = () => {

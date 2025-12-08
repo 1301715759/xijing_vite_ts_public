@@ -17,7 +17,7 @@ export default function useRoomsByTag(
   // fetchFunction 需要传递 url 和 params
   
 
-  const { dataList, loadData, loading, error } = useFetchList<RoomListResponseData>(fetchRoomListByTag, defaultParams, 'data', autoLoad);
+  const { dataList, loadData, loading, error } = useFetchList<RoomListResponseData[]>(fetchRoomListByTag, defaultParams, 'data', autoLoad);
 
   // 自定义加载和错误提示
   async function loadRoomsByTag(params: RoomsByTagRequestParams = defaultParams) {

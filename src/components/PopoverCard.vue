@@ -13,7 +13,7 @@
     <template #reference>
       <slot><img :src="img" 
         :alt="cardType === 'user' ? '用户头像' : '房间封面'" 
-        :class="[size, {'male': gender === 1, 'female': gender === 2}, placeholder]"  
+        :class="[size, {'male': gender === 1, 'female': gender === 2}, placeholder, cardType]"  
         /></slot>
     </template>
     
@@ -75,7 +75,12 @@ const onPopoverHide = () => {
   height: 40px;
 }
 img {
-  border-radius: 50%;
+  &.user {
+    border-radius: 50%;
+  }
+  &.room {
+    border-radius: 6px;
+  }
   &.male.broadcast {
     border: 2px solid #007bff;
     animation: animated-border-male 1.5s linear infinite;

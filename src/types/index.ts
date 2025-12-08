@@ -6,5 +6,6 @@ export type { UserInfoResponseData } from '@/types/userInfo';
 export type { RoomInfoResponseData, RoomSeatsResponseData } from '@/types/roomInfo';
 export type { AppLoginResponseData, WxLoginResponseData } from '@/types/qrcodeLogin';
 export type { SoundCardResponseData } from '@/types/soundCard';
+export type { FollowResponseData } from '@/types/relationList';
 // export * from './room';
 // export * from './common';

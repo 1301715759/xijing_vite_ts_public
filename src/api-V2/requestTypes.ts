@@ -81,3 +81,11 @@ export interface SoundCardRequestParams {
     id?: number;
     uid?: number;
 }
+/**
+ * 关注列表接口的请求参数
+ * @param page 页码
+ */
+export interface FollowListRequestParams {
+    page: number;
+    limit?: number;
+}

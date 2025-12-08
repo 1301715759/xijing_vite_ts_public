@@ -6,7 +6,7 @@ import {
   appLoginCheck, 
   wechatLoginQrcode, 
   wxLoginCheck 
-} from '@/api-V2/login';
+} from '@/api-V2';
 import type { AppLoginResponseData, WxLoginResponseData } from '@/types/qrcodeLogin';
 import { ElMessage } from 'element-plus';
 import { setCookie } from '@/utils/cookie';

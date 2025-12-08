@@ -4,6 +4,9 @@ export { fetchFollowOnline } from '@/api-V2/followOnline';
 export { fetchSquareNews } from '@/api-V2/squareNews';
 export { fetchRoomInfo, fetchRoomListByTag, fetchRoomSeats } from '@/api-V2/interactive';
 export { fetchUserInfo, fetchSoundCard } from '@/api-V2/userInfo';
+export { wechatLoginQrcode, appLoginQrcode, wxLoginCheck, appLoginCheck } from '@/api-V2/login';
+export { fetchFollowList } from '@/api-V2/relationList';
+
 
 // 统一导出所有类型定义
 export type { 
@@ -11,7 +14,8 @@ export type {
   FollowOnlineRequestParams,
   SquareNewsRequestParams,
   RoomsByTagRequestParams,
-  SoundCardRequestParams
+  SoundCardRequestParams,
+  FollowListRequestParams,
 } from '@/api-V2/requestTypes';
 
 // 统一导出所有响应数据类型
@@ -26,6 +30,7 @@ export type {
   SoundCardResponseData,
   RoomInfoResponseData,
   RoomSeatsResponseData,
+  FollowResponseData,
 } from '@/types';
 
 // 导出API端点常量
@@ -38,6 +43,8 @@ import { fetchSquareNews } from '@/api-V2/squareNews';
 import { fetchRoomInfo, fetchRoomListByTag, fetchRoomSeats } from '@/api-V2/interactive';
 import { fetchUserInfo, fetchSoundCard } from '@/api-V2/userInfo';
 import { wechatLoginQrcode, appLoginQrcode, wxLoginCheck, appLoginCheck } from '@/api-V2/login';
+import { fetchFollowList } from '@/api-V2/relationList';
+
 
 
 const ApiMethods = {
@@ -53,6 +60,7 @@ const ApiMethods = {
   appLoginQrcode,
   wxLoginCheck,
   appLoginCheck,
+  fetchFollowList,
 };
 
 export default ApiMethods;

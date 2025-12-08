@@ -21,6 +21,8 @@ export const API_ENDPOINTS = {
   Room: '/interactive/room/',
   // 根据标签获取房间列表
   ROOMs_BY_TAG: '/interactive/rooms/by_tag',
+  // 关注列表接口
+  FOLLOW_LIST: '/follow/',
   
 } as const;
 

@@ -1,8 +1,8 @@
 <template>
     <div class="mini-room-view">
         {{ roomId }}
-        <div class="seats-view" :class="{'hudong':roomMode === 0||roomMode === 18, 'piaxi':roomMode == 3||roomMode == 16, 'diantai':roomMode == 2, 'shetuan':roomMode == 13}">
-            <template v-for="idx in getLayout(props.roomMode)">
+        <div class="seats-view" :class="roomClassMap[props.roomMode]?.seat_type">
+            <template v-for="idx in roomClassMap[props.roomMode]?.seat_count">
                 <div class="seat-item">
                     <div class="seat">
                         <template v-for="seat in roomSeatsList">
@@ -15,7 +15,12 @@
                                     size="medium"
                                     placeholder="miniroom"
                                 />
-                                <p class="nickname" :class="{'female':seat.user?.gender === 2, 'male':seat.user?.gender !== 2}">{{ seat.user?.nickname }}</p>
+                                <p 
+                                    class="nickname" 
+                                    :class="{'female':seat.user?.gender === 2, 'male':seat.user?.gender !== 2}"
+                                >
+                                    {{ seat.user?.nickname }}
+                                </p>
                             </div>
                             
                         </template>
@@ -39,21 +44,19 @@ const props = defineProps({
     default: 3
   }
 })
-const getLayout = (roomMode: number) => {
-  switch (roomMode) {
-    case 0:
-      return 9;
-    case 3:
-      return 8;
-    case 2:
-      return 4;
-    case 13:
-      return 12;
-    case 18:
-      return 12;
-    default:
-      return 8;
-  }
+interface RoomClassMap {
+  seat_type: string;
+  seat_count: number;
+}
+const roomClassMap: Record<number, RoomClassMap> = {
+  0: {seat_type: 'hudong', seat_count: 9},
+  18: {seat_type: 'hudong', seat_count: 12},
+  3: {seat_type: 'piaxi', seat_count: 8},
+  16: {seat_type: 'piaxi', seat_count: 8},
+  2: {seat_type: 'diantai', seat_count: 4},
+  13: {seat_type: 'shetuan', seat_count: 12},
+  11: {seat_type: 'piaxi', seat_count: 8},
+
 }
 const { dataList: roomSeatsList, loadRoomSeats } = useRoomSeats(props.roomId.toString());
 loadRoomSeats();
